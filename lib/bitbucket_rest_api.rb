@@ -11,7 +11,12 @@ require 'bitbucket_rest_api/helpers/repository_helper'
 
 module BitBucket
   extend Configuration
-
+  
+  class << self		
+    # Handle for the client instance		
+    attr_accessor :api_client		
+  end
+ 
   module AutoloadHelper
 
     def autoload_all(prefix, options)

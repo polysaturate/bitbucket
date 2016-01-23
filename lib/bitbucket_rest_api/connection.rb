@@ -47,7 +47,11 @@ module BitBucket
         end
 
         if client_id? and client_secret?
-          builder.use FaradayMiddleware::OAuth, {:consumer_key => client_id, :consumer_secret => client_secret, :token => oauth_token, :token_secret => oauth_secret}
+          if oauth_secret?
+            builder.use FaradayMiddleware::OAuth, {:consumer_key => client_id, :consumer_secret => client_secret, :token => oauth_token, :token_secret => oauth_secret}
+          else
+            builder.use FaradayMiddleware::OAuth2, oauth_token
+          end
         end
 
         builder.use BitBucket::Request::BasicAuth, authentication if basic_authed?

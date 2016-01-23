@@ -57,7 +57,7 @@ module BitBucket
         builder.use BitBucket::Request::BasicAuth, authentication if basic_authed?
         builder.use FaradayMiddleware::EncodeJson
 
-        builder.use Faraday::Response::Logger if ENV['DEBUG']
+        builder.use Faraday::Response::Logger if Rails.env == "development"
         unless options[:raw]
           builder.use BitBucket::Response::Mashify
           builder.use BitBucket::Response::Jsonize

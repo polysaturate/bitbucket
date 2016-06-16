@@ -89,6 +89,10 @@ module BitBucket
     def pull_request
       @pull_request ||= ApiFactory.new 'Repos::PullRequest'
     end
+    
+    def webhooks
+      @webhooks ||= ApiFactory.new 'Repos::Webhooks'
+    end
 
     # List branches
     #
